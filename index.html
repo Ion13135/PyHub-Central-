@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Index Hub - Professional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.1em;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: #2a5298;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .category-card h2 {
+            color: #2a5298;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-card .icon {
+            font-size: 1.8em;
+        }
+
+        .category-card ul {
+            list-style: none;
+        }
+
+        .category-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-card li:last-child {
+            border-bottom: none;
+        }
+
+        .category-card a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+            flex-grow: 1;
+        }
+
+        .category-card a:hover {
+            color: #2a5298;
+        }
+
+        .badge {
+            background: #4CAF50;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+
+        .badge.popular {
+            background: #ff9800;
+        }
+
+        .badge.new {
+            background: #f44336;
+        }
+
+        .quick-links {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+        }
+
+        .quick-links h2 {
+            color: #2a5298;
+            margin-bottom: 20px;
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .quick-link-btn {
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: transform 0.3s;
+            font-weight: bold;
+        }
+
+        .quick-link-btn:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px dotted white;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Python Index Hub</h1>
+            <p>Resurse profesionale pentru dezvoltatori Python</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Caută module, biblioteci, resurse..." onkeyup="searchResources()">
+        </div>
+
+        <div class="quick-links">
+            <h2>⚡ Acces Rapid</h2>
+            <div class="quick-links-grid">
+                <a href="https://docs.python.org/3/" target="_blank" class="quick-link-btn">📚 Documentație Oficială</a>
+                <a href="https://pypi.org/" target="_blank" class="quick-link-btn">📦 PyPI Packages</a>
+                <a href="https://github.com/topics/python" target="_blank" class="quick-link-btn">💻 GitHub Python</a>
+                <a href="https://realpython.com/" target="_blank" class="quick-link-btn">🎓 Real Python</a>
+            </div>
+        </div>
+
+        <div class="categories" id="categoriesContainer">
+            <div class="category-card">
+                <h2><span class="icon">🌐</span>Dezvoltare Web</h2>
+                <ul>
+                    <li><a href="https://www.djangoproject.com/" target="_blank">Django</a><span class="badge popular">Popular</span></li>
+                    <li><a href="https://flask.palletsprojects.com/" target="_blank">Flask</a><span class="badge popular">Popular</span></li>
+                    <li><a href="https://fastapi.tiangolo.com/" target="_blank">FastAPI</a><span class="badge">Rapid</span></li>
+                    <li><a href="https://www.tornadoweb.org/" target="_blank">Tornado</a></li>
+                    <li><a href="https://bottlepy.org/" target="_blank">Bottle</a></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <h2><span class="icon">📊</span>Data Science & AI</h2>
+                <ul>
+                    <li><a href="https://numpy.org/" target="_blank">NumPy</a><span class="badge popular">Popular</span></li>
+                    <li><a href="https://pandas.pydata.org/" target="_blank">Pandas</a><span class="badge popular">Popular</span></li>
+                    <li><a href="https://scikit-learn.org/" target="_blank">Scikit-learn</a></li>
+                    <li><a href="https://www.tensorflow.org/" target="_blank">TensorFlow</a><span class="badge">AI</span></li>
+                    <li><a href="https://pytorch.org/" target="_blank">PyTorch</a><span class="badge">AI</span></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <h2><span class="icon">📈</span>Vizualizare Date</h2>
+                <ul>
+                    <li><a href="https://matplotlib.org/" target="_blank">Matplotlib</a></li>
+                    <li><a href="https://seaborn.pydata.org/" target="_blank">Seaborn</a></li>
+                    <li><a href="https://plotly.com/python/" target="_blank">Plotly</a><span class="badge">Interactiv</span></li>
+                    <li><a href="https://bokeh.org/" target="_blank">Bokeh</a></li>
+                    <li><a href="https://altair-viz.github.io/" target="_blank">Altair</a></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <h2><span class="icon">🗄️</span>Baze de Date</h2>
+                <ul>
+                    <li><a href="https://www.sqlalchemy.org/" target="_blank">SQLAlchemy</a><span class="badge popular">Popular</span></li>
+                    <li><a href="https://www.psycopg.org/" target="_blank">Psycopg2</a></li>
+                    <li><a href="https://pymongo.readthedocs.io/" target="_blank">PyMongo</a></li>
+                    <li><a href="https://www.redis.io/docs/clients/python/" target="_blank">Redis-py</a></li>
+                    <li><a href="https://docs.peewee-orm.com/" target="_blank">Peewee</a></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <h2><span class="icon">🧪</span>Testing & Quality</h2>
+                <ul>
+                    <li><a href="https://docs.pytest.org/" target="_blank">Pytest</a><span class="badge popular">Popular</span></li>
+                    <li><a href="https://docs.python.org/3/library/unittest.html" target="_blank">Unittest</a></li>
+                    <li><a href="https://coverage.readthedocs.io/" target="_blank">Coverage.py</a></li>
+                    <li><a href="https://pylint.readthedocs.io/" target="_blank">Pylint</a></li>
+                    <li><a href="https://flake8.pycqa.org/" target="_blank">Flake8</a></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <h2><span class="icon">🔧</span>DevOps & Tools</h2>
+                <ul>
+                    <li><a href="https://www.ansible.com/" target="_blank">Ansible</a></li>
+                    <li><a href="https://www.docker.com/products/docker-desktop" target="_blank">Docker SDK</a></li>
+                    <li><a href="https://docs.python-requests.org/" target="_blank">Requests</a><span class="badge popular">Popular</span></li>
+                    <li><a href="https://www.celeryproject.org/" target="_blank">Celery</a></li>
+                    <li><a href="https://boto3.amazonaws.com/v1/documentation/api/latest/index.html" target="_blank">Boto3</a></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <h2><span class="icon">🎮</span>Game Development</h2>
+                <ul>
+                    <li><a href="https://www.pygame.org/" target="_blank">Pygame</a><span class="badge popular">Popular</span></li>
+                    <li><a href="https://www.panda3d.org/" target="_blank">Panda3D</a></li>
+                    <li><a href="https://arcade.academy/" target="_blank">Arcade</a><span class="badge new">Nou</span></li>
+                    <li><a href="https://www.pyglet.org/" target="_blank">Pyglet</a></li>
+                    <li><a href="https://kivy.org/" target="_blank">Kivy</a></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <h2><span class="icon">🔒</span>Securitate</h2>
+                <ul>
+                    <li><a href="https://cryptography.io/" target="_blank">Cryptography</a></li>
+                    <li><a href="https://passlib.readthedocs.io/" target="_blank">Passlib</a></li>
+                    <li><a href="https://pyjwt.readthedocs.io/" target="_blank">PyJWT</a></li>
+                    <li><a href="https://pyotp.readthedocs.io/" target="_blank">PyOTP</a></li>
+                    <li><a href="https://pythonhosted.org/itsdangerous/" target="_blank">ItsDangerous</a></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <h2><span class="icon">🌍</span>Web Scraping</h2>
+                <ul>
+                    <li><a href="https://beautiful-soup-4.readthedocs.io/" target="_blank">Beautiful Soup</a><span class="badge popular">Popular</span></li>
+                    <li><a href="https://scrapy.org/" target="_blank">Scrapy</a><span class="badge popular">Popular</span></li>
+                    <li><a href="https://selenium-python.readthedocs.io/" target="_blank">Selenium</a></li>
+                    <li><a href="https://playwright.dev/python/" target="_blank">Playwright</a><span class="badge new">Nou</span></li>
+                    <li><a href="https://lxml.de/" target="_blank">lxml</a></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <h2><span class="icon">📱</span>GUI Development</h2>
+                <ul>
+                    <li><a href="https://docs.python.org/3/library/tkinter.html" target="_blank">Tkinter</a></li>
+                    <li><a href="https://www.riverbankcomputing.com/software/pyqt/" target="_blank">PyQt</a></li>
+                    <li><a href="https://kivy.org/" target="_blank">Kivy</a></li>
+                    <li><a href="https://wxpython.org/" target="_blank">wxPython</a></li>
+                    <li><a href="https://pysimplegui.readthedocs.io/" target="_blank">PySimpleGUI</a></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <h2><span class="icon">📝</span>Documentație</h2>
+                <ul>
+                    <li><a href="https://www.sphinx-doc.org/" target="_blank">Sphinx</a><span class="badge popular">Popular</span></li>
+                    <li><a href="https://www.mkdocs.org/" target="_blank">MkDocs</a></li>
+                    <li><a href="https://pdoc.dev/" target="_blank">pdoc</a></li>
+                    <li><a href="https://pycco-docs.github.io/pycco/" target="_blank">Pycco</a></li>
+                    <li><a href="https://readthedocs.org/" target="_blank">Read the Docs</a></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <h2><span class="icon">⚙️</span>Utilități</h2>
+                <ul>
+                    <li><a href="https://click.palletsprojects.com/" target="_blank">Click</a></li>
+                    <li><a href="https://python-pillow.org/" target="_blank">Pillow</a></li>
+                    <li><a href="https://arrow.readthedocs.io/" target="_blank">Arrow</a></li>
+                    <li><a href="https://github.com/tqdm/tqdm" target="_blank">tqdm</a></li>
+                    <li><a href="https://pydantic-docs.helpmanual.io/" target="_blank">Pydantic</a><span class="badge new">Nou</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>💙 Python Index Hub - Creat pentru dezvoltatori profesioniști</p>
+            <p><a href="https://www.python.org/" target="_blank">Python.org</a> | <a href="https://peps.python.org/" target="_blank">PEPs</a> | <a href="https://www.python.org/community/" target="_blank">Comunitate</a></p>
+        </footer>
+    </div>
+
+    <script>
+        function searchResources() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const container = document.getElementById('categoriesContainer');
+            const cards = container.getElementsByClassName('category-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const txtValue = card.textContent || card.innerText;
+                
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        }
+
+        // Animație la încărcare
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.category-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'opacity 0.5s, transform 0.5s';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 10);
+                }, index * 50);
+            });
+        });
+    </script>
+</body>
+</html>
